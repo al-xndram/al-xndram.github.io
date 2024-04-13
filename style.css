@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(13, 65, 35);
+    cursor: crosshair;
+}
+
+::selection {
+    background: green;
+    color: white;
+  }
+
+a{  
+    text-decoration: none;
+    color: rgb(14, 65, 35);
+    font-size: 18pt;
+}
+
+a:hover{
+    font-style: italic;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+h1, h2 {
+    font-weight: normal;
+    font-size: 18pt;
+    margin-bottom: 0.5vh;
+}
+
+#selectedwork {
+    margin-bottom: 3vh;
+}
+
+/*  */
+
+.menu-container{
+    height: 100vh;
+    padding: 5vw;
+    padding-left: 7vw;
+}
+
+.linked-list {
+    padding-top: 3vh;
+    line-height: 28pt;
+}
+
+.info-contact {
+    padding-top: 25vh;
+}
+
+/* #email:hover {
+    background-color: green;
+    width: 300px;
+    color: white;
+} */
+
+
+/*  */
+
+.projects{
+    overflow: scroll;
+}   
+
+.project-panel{
+    width: 100%;
+    margin-bottom: 0.5vh;
+}
+
+.project-panel a{
+    margin-bottom: 200px;
+}
+
+.project-panel img{
+    width: 100%;
+    height: auto;
+}
+
+/*  */
+
+.projects-wrapper{
+    padding-top: 5vh;
+    /* border: 1px solid black; */
+}
+
+.individual-project-title{
+    margin-bottom: 4vh;
+    /* border: 1px solid red; */
+}
+
+.project-description{
+    margin-bottom: 5vh;
+    font-size: 12pt;
+}
+
+.project-image{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.project-image img{
+    width: 100%;
+    height: auto;
+}
