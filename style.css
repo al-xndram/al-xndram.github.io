@@ -113,3 +113,8 @@ h1, h2 {
     columns: 3;
     column-gap: 0.4vw;
 }
+
+#exhibition-link:hover {
+    background: green;
+    color: white;
+}
