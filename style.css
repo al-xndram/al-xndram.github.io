@@ -38,6 +38,8 @@ h1, h2 {
     margin-bottom: 3vh;
 }
 
+
+
 /*  */
 
 .menu-container{
@@ -52,14 +54,9 @@ h1, h2 {
 }
 
 .info-contact {
-    padding-top: 25vh;
+    padding-top: 13vh;
 }
 
-/* #email:hover {
-    background-color: green;
-    width: 300px;
-    color: white;
-} */
 
 
 /*  */
@@ -81,6 +78,8 @@ h1, h2 {
     width: 100%;
     height: auto;
 }
+
+
 
 /*  */
 
@@ -109,7 +108,12 @@ h1, h2 {
     height: auto;
 }
 
-.group-img {
+.twogroup-img {
+    columns: 2;
+    column-gap: 0.4vw;
+}
+
+.threegroup-img {
     columns: 3;
     column-gap: 0.4vw;
 }
