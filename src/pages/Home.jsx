@@ -221,7 +221,7 @@ function formatYearKeywordsLine(year, keywordsDisplay) {
   return [year, keywordsDisplay].filter(Boolean).join(" / ");
 }
 
-function Home() {
+function Home({ onReady }) {
   const refreshKey = useArenaRefresh();
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState(null);
@@ -242,9 +242,11 @@ function Home() {
       })
       .then((data) => {
         if (data != null && !cancelled) setProjects(data);
+        if (!cancelled) onReady?.();
       })
       .catch((err) => {
         if (!cancelled) setError(err?.message ?? "Failed to load projects.");
+        if (!cancelled) onReady?.();
       });
     return () => {
       cancelled = true;
