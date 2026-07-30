@@ -23,7 +23,7 @@ export const GRID = {
   /** Column gap / gutter (px) */
   GAP: 20,
   /** Row gap between grid children (CSS value) */
-  ROW_GAP: "0.75rem",
+  ROW_GAP: "0.3rem",
 
   // ── Tablet (≤ BREAKPOINT_TABLET) ───────────────────────────
   /** Number of grid columns on tablet */

@@ -52,7 +52,7 @@ function getAuthHeaders() {
 }
 
 function getGroupSlug() {
-  const slug = import.meta.env.VITE_GROUP_SLUG;
+  const slug = "alex-web";
   if (!slug) throw new Error("VITE_GROUP_SLUG is not set");
   return slug;
 }

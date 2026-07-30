@@ -53,7 +53,7 @@ const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0);
 
   @media ${GRID.MEDIA_TABLET} {
     padding: max(${GRID.PADDING_TABLET}px, env(safe-area-inset-top, 0px))
@@ -79,7 +79,7 @@ const GalleryScroll = styled.div`
   overflow-y: hidden;
   display: flex;
   align-items: center;
-  gap: ${GRID.GAP}px;
+  gap: 10px;
   padding: 0 ${GRID.PADDING}px;
   height: 70vh;
   max-height: 70vh;
