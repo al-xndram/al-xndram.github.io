@@ -126,7 +126,7 @@ function Sidebar({ keywords = [], activeKeywords = new Set(), onKeywordClick }) 
           {useSerif ? "serif" : "sans"}
         </FontToggle>
         <p>Curriculum Vitae</p>
-        <p>Contact</p>
+        <p>alxndra.contact@gmail.com</p>
       </SidebarSecondary>
     </SidebarWrapper>
   );
