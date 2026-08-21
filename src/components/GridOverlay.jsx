@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { GRID } from '../grid'
 import { useMediaQuery } from '../grid/useMediaQuery'
@@ -50,30 +49,15 @@ const GridColumn = styled.div`
 `
 
 function GridOverlay() {
-  const [isVisible, setIsVisible] = useState(false)
+  const isVisible = false
   const isMobile = useMediaQuery(GRID.MEDIA_MOBILE)
   const isTablet = useMediaQuery(GRID.MEDIA_TABLET)
 
-  // Render the correct number of columns for the active breakpoint
   const columnCount = isMobile
     ? GRID.COLUMNS_MOBILE
     : isTablet
       ? GRID.COLUMNS_TABLET
       : GRID.COLUMNS
-
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      // Ignore key repeats so holding G doesn't flicker the overlay
-      if ((e.key === 'g' || e.key === 'G') && !e.repeat) {
-        setIsVisible(prev => !prev)
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyPress)
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [])
 
   return (
     <GridContainer>

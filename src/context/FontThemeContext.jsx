@@ -27,7 +27,7 @@ export function FontThemeProvider({ children }) {
       try {
         localStorage.setItem(STORAGE_KEY, next ? "serif" : "sans");
       } catch {
-        /* ignore */
+        void 0;
       }
       return next;
     });
@@ -54,7 +54,6 @@ export function FontThemeProvider({ children }) {
   );
 }
 
-/* eslint-disable react-refresh/only-export-components -- hook colocated with provider */
 export function useFontTheme() {
   const ctx = useContext(FontThemeContext);
   if (!ctx) {

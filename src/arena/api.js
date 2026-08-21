@@ -1,7 +1,5 @@
 import { fetchArena, getGroupSlug } from "./client.js";
 
-// ─── Group ───────────────────────────────────────────────
-
 export async function getGroup(slug = getGroupSlug(), { skipCache } = {}) {
   return fetchArena(`/groups/${encodeURIComponent(slug)}`, { skipCache });
 }
@@ -47,8 +45,6 @@ export async function getGroupChannels(
   return fetchAllGroupContents(slug, { type: "Channel", skipCache });
 }
 
-// ─── Channel (scoped to group) ───────────────────────────
-
 export async function getChannel(idOrSlug, { skipCache } = {}) {
   return fetchArena(`/channels/${encodeURIComponent(idOrSlug)}`, { skipCache });
 }
@@ -86,15 +82,9 @@ export async function fetchAllChannelContents(
   return all;
 }
 
-// ─── Block ───────────────────────────────────────────────
-
 export async function getBlock(id, { skipCache } = {}) {
   return fetchArena(`/blocks/${encodeURIComponent(id)}`, { skipCache });
 }
-
-// ─── Finders (group-scoped) ──────────────────────────────
-// All finders start from the group so we never accidentally
-// reach outside the project's Are.na group.
 
 export async function findChannelByTitle(
   title,
@@ -134,7 +124,6 @@ export async function findBlockByTitle(
   );
 }
 
-/** Find a block by title within a channel (by slug or id). Use when you already have the channel. */
 export async function findBlockByTitleInChannel(
   channelSlugOrId,
   blockTitle,
@@ -174,16 +163,7 @@ export async function getChannelContentsByTitle(
   return fetchAllChannelContents(channel.slug, { skipCache });
 }
 
-// ─── Prefetch ────────────────────────────────────────────
-// Kick off all page-level channel fetches in parallel so
-// navigating between pages is instant.
-//
-// Replace these with your own page channel titles.
-
-const PAGE_CHANNELS = [
-  // "Page / Home",
-  // "Page / About",
-];
+const PAGE_CHANNELS = [];
 
 export function prefetchAll() {
   if (PAGE_CHANNELS.length === 0) return;
@@ -201,14 +181,11 @@ export function prefetchAll() {
       });
     })
     .catch(() => {
-      /* pages will retry on mount */
+      void 0;
     });
 }
 
-// Start immediately at module load time
 prefetchAll();
-
-// ─── Block helpers ───────────────────────────────────────
 
 export function textFromBlock(block) {
   if (!block) return "";

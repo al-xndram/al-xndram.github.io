@@ -16,7 +16,6 @@ const PROJECT_TITLE_PREFIX = "‡";
 const ProjectRow = styled(GridCell)`
   min-width: 0;
   cursor: pointer;
-  visibility: ${(p) => (p.$hidden ? "hidden" : "visible")};
 
   @media ${GRID.MEDIA_TABLET} {
     display: flex;
@@ -106,12 +105,18 @@ const GalleryScroll = styled.div`
   }
 `;
 
+const GalleryItem = styled.figure`
+  position: relative;
+  margin: 0;
+  height: 100%;
+  flex-shrink: 0;
+`;
+
 const GalleryImg = styled.img`
   height: 100%;
   width: auto;
   display: block;
   object-fit: contain;
-  flex-shrink: 0;
 
   @media ${GRID.MEDIA_TABLET} {
     max-width: min(90vw, 100%);
@@ -121,6 +126,23 @@ const GalleryImg = styled.img`
   @media ${GRID.MEDIA_MOBILE} {
     max-width: min(85vw, 100%);
     max-height: 100%;
+  }
+`;
+
+const Caption = styled.figcaption`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 8px 10px;
+  max-width: 60%;
+  overflow-wrap: break-word;
+  color: ${(p) => (p.$light ? "#fff" : "#000")};
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  ${GalleryItem}:hover & {
+    opacity: 1;
   }
 `;
 
@@ -290,6 +312,8 @@ function Home({ onReady }) {
             id: item.id,
             url: imageUrlFromBlock(item),
             title: item.title || "",
+            altText: item.image?.alt_text || "",
+            description: textFromBlock({ content: item.description }),
           }))
           .filter((img) => img.url);
 
@@ -335,18 +359,19 @@ function Home({ onReady }) {
         )}
 
         {!error &&
-          projects.map((p) => {
-            const hidden =
-              activeKeywords.size > 0 &&
-              !p.keywords.some((kw) => activeKeywords.has(kw));
-            return (
+          projects
+            .filter(
+              (p) =>
+                activeKeywords.size === 0 ||
+                p.keywords.some((kw) => activeKeywords.has(kw)),
+            )
+            .map((p) => (
               <ProjectRow
                 key={p.id}
                 $start={3}
                 $span={10}
                 $subgrid
-                $hidden={hidden}
-                onClick={hidden ? undefined : () => handleProjectClick(p)}
+                onClick={() => handleProjectClick(p)}
               >
                 <GridCell $start={1} $span={2} $alignSelf="start">
                   <ThumbnailFrame>
@@ -363,8 +388,7 @@ function Home({ onReady }) {
                 <MetaDesktop $start={6} $span={2} $alignSelf="start">{p.keywordsDisplay}</MetaDesktop>
                 <DescriptionCell $start={8} $span={3} $alignSelf="start">{p.description}</DescriptionCell>
               </ProjectRow>
-            );
-          })}
+            ))}
       </Grid>
 
       {expandedId != null && (
@@ -373,11 +397,14 @@ function Home({ onReady }) {
             {galleryLoading && <span>Loading…</span>}
             {!galleryLoading &&
               galleryImages.map((img) => (
-                <GalleryImg
-                  key={img.id}
-                  src={img.url}
-                  alt={img.title}
-                />
+                <GalleryItem key={img.id}>
+                  <GalleryImg src={img.url} alt={img.altText || img.title} />
+                  {img.description && (
+                    <Caption $light={img.altText.trim().toUpperCase() === "W"}>
+                      {img.description}
+                    </Caption>
+                  )}
+                </GalleryItem>
               ))}
           </GalleryScroll>
         </Overlay>

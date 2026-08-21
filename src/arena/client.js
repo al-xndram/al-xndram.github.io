@@ -1,11 +1,7 @@
 const BASE_URL = "https://api.are.na/v3";
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL = 5 * 60 * 1000;
 const CACHE_PREFIX = "arena:";
 
-// ─── In-flight dedup + sessionStorage cache ──────────────
-// Clear stale arena entries on every full page load so a refresh
-// always fetches fresh data. The cache still works within a session
-// (SPA navigations) since modules only re-execute on hard reloads.
 try {
   const toRemove = [];
   for (let i = 0; i < sessionStorage.length; i++) {
@@ -14,7 +10,7 @@ try {
   }
   toRemove.forEach((key) => sessionStorage.removeItem(key));
 } catch {
-  /* private browsing or storage unavailable */
+  void 0;
 }
 
 const inflight = new Map();
@@ -41,7 +37,7 @@ function cacheSet(key, data) {
       JSON.stringify({ data, ts: Date.now() }),
     );
   } catch {
-    /* quota exceeded — silently skip */
+    void 0;
   }
 }
 
@@ -77,7 +73,6 @@ async function fetchArena(
     if (cached !== undefined) return cached;
   }
 
-  // Deduplicate identical in-flight requests
   if (inflight.has(cacheKey)) return inflight.get(cacheKey);
 
   const promise = (async () => {
