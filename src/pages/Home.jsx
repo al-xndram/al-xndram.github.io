@@ -28,6 +28,10 @@ const ProjectRow = styled(GridCell)`
     flex-direction: column;
     gap: 0.75rem;
   }
+  &:hover{
+    transform: translateX(1em);
+    transition: 100ms;
+  }
 `;
 
 const ThumbnailFrame = styled.div`
